@@ -1,0 +1,70 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<ul id="userList">
+</ul>
+@section Scripts{
+    <script>
+        function addUserToList(username) {
+            var list = document.getElementById("userList");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(username));
+            li.setAttribute("id", "user-" + username);
+            list.appendChild(li);
+        }
+
+        function removeUserFromList(username) {
+            var li = document.getElementById("user-" + username);
+            if (li != null) {
+                li.remove();
+            }
+        }
+
+        function clearUserList() {
+            var list = document.getElementById("userList");
+            list.innerHtml = "";
+        }
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/userHub")
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        connection.on("OnConnected", users => {
+            console.log("Connected an got following users: ", users);
+            users.forEach((user) =>
+                addUserToList(user));
+        });
+
+        connection.on("OnUserConnected", (username) => {
+            console.log("A user connected: ", username);
+            addUserToList(username);
+        });
+
+        connection.on("OnUserDisconnected", (username) => {
+            console.log("A user disconnected: ", username);
+            removeUserFromList(username);
+        });
+
+        connection.on("DoDisconnect", (reason) => {
+            console.log("Server requesting to disconnect.");
+            connection.stop().then(() => {
+                clearUserList();
+                document.getElementById("userList").innerText = "Offline";
+                alert(reason);
+            });
+        });
+
+        connection.start().then(function () {
+            console.log("connected");
+        });
+    </script>
+}

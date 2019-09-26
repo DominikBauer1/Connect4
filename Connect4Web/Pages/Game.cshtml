@@ -1,0 +1,217 @@
+﻿@page
+@model Connect4Web.Pages.GameModel
+@{
+    ViewData["Title"] = "Game";
+}
+<style type="text/css">
+    table.connect4 {
+        width: 100%;
+    }
+
+        table.connect4 tbody {
+            background-color: lightgray;
+            animation: color-change 0s infinite;
+        }
+
+        table.connect4 thead th {
+            text-align: center;
+        }
+
+        table.connect4 tbody td {
+            width: 14.28%;
+            position: relative;
+        }
+
+            table.connect4 tbody td:after {
+                content: '';
+                display: block;
+                margin-top: 100%;
+            }
+
+            table.connect4 tbody td span.field {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-radius: 50%;
+                margin: 0.5em;
+                background-color: white;
+            }
+
+                table.connect4 tbody td span.field.is-player1 {
+                    background-color: red;
+                }
+
+                table.connect4 tbody td span.field.is-player2 {
+                    background-color: yellow;
+                }
+</style>
+
+<section class="hero is-dark is-small">
+    <div class="hero-body is-hero-title">
+        <div class="container">
+            <div class="column is-12">
+                <h3 class="title is-3">Titel</h3>
+                <p class="subtitle">Längerer Untertitel</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <h4 class="title is-4">Gegner:</h4>
+                <p class="subtitle">Der stinkende Gero</p>
+
+                <h5 class="title is-5">Nächster Zug:</h5>
+                <p class="subtitle">Du</p>
+
+                <h5 class="title is-5">Anzahl Züge:</h5>
+                <p class="subtitle">Fahr doch vorbei, du Arsch</p>
+
+                <h5 class="title is-5">Letzter Zug:</h5>
+                <p class="subtitle">Zementa, mach die Fensterscheibe runter!</p>
+            </div>
+            <div class="column">
+                <table class="connect4" id="game">
+                    <thead>
+                        <tr>
+                            <th class="drop-button" data-col="0"><span class="icon is-medium"><i class="fas fa-2x fa-arrow-down"></i></span></th>
+                            <th class="drop-button" data-col="1"><span class="icon is-medium"><i class="fas fa-2x fa-arrow-down"></i></span></th>
+                            <th class="drop-button" data-col="2"><span class="icon is-medium"><i class="fas fa-2x fa-arrow-down"></i></span></th>
+                            <th class="drop-button" data-col="3"><span class="icon is-medium"><i class="fas fa-2x fa-arrow-down"></i></span></th>
+                            <th class="drop-button" data-col="4"><span class="icon is-medium"><i class="fas fa-2x fa-arrow-down"></i></span></th>
+                            <th class="drop-button" data-col="5"><span class="icon is-medium"><i class="fas fa-2x fa-arrow-down"></i></span></th>
+                            <th class="drop-button" data-col="6"><span class="icon is-medium"><i class="fas fa-2x fa-arrow-down"></i></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                            <td><span class="field"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column is-2">
+                <aside class="menu">
+                    <p class="menu-label">
+                        Freunde
+                    </p>
+                    <ul class="menu-list">
+                        <li><a>DerStinkendeGero</a></li>
+                        <li><a>ThePartyTrain</a></li>
+                        <li><a>PartyBissesDachLupft</a></li>
+                        <li><a>xX_Miner_Xx</a></li>
+                    </ul>
+                    <p class="menu-label">
+                        Letzten Gegner
+                    </p>
+                    <ul class="menu-list">
+                        <li><a>xX_Miner_Xx</a></li>
+                        <li><a>Transfers</a></li>
+                        <li><a>Balance</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <script>
+        $(".drop-button").click(function () {
+            var element = $(this);
+            var col = element.data('col');
+            sendDrop(col);
+        });
+
+        let game = [
+            [1, 2, 1, 1, 2, 1, 0],
+            [1, 2, 2, 2, 0, 0, 0],
+            [2, 1, 0, 0, 1, 1, 0],
+            [1, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0]
+        ];
+
+        function sendDrop(col) {
+            console.log("drop col " + col);
+        }
+
+        function updateField(field) {
+            for (y = 0; y < 6; y++) {
+                for (x = 0; x < 7; x++) {
+                    var cell = getCell("game", x, y);
+                    if (field[y][x] == 1) {
+                        cell.classList.add("is-player1");
+                    }
+                    else if (field[y][x] == 2) {
+                        cell.classList.add("is-player2");
+                    }
+                }
+            }
+        }
+
+        function getCell(tableId, x, y) {
+            let selector = "#" + tableId + " tbody tr:nth-child(" + (6 - (y)) + ") td:nth-child(" + (x + 1) + ") span.field";
+            return document.querySelector(selector);
+        }
+
+        document.addEventListener('DOMContentLoaded', function (event) {
+            updateField(game);
+        }, false);
+    </script>
+}

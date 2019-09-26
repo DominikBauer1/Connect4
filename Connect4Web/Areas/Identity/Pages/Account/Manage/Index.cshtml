@@ -1,0 +1,53 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profil";
+}
+
+<div style="padding-left: 0.75rem">
+    <h3 class="title is-3 has-text-primary">@ViewData["Title"]</h3>
+    @Html.Partial("_StatusMessage", Model.StatusMessage)
+</div>
+<div class="columns is-marginless">
+    <div class="column is-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="All" class="help is-danger"></div>
+            <table class="" style="margin-bottom: 2rem;">
+                <tr>
+                    <td style="vertical-align: middle; padding: 1rem 1rem 1rem 0rem">Anmeldename:</td>
+                    <td style="vertical-align: middle">
+                        <input asp-for="Username" class="input" disabled />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle; padding: 1rem 1rem 1rem 0rem">E-Mail:</td>
+                    <td style="vertical-align: middle; width:100%">
+                        <input asp-for="Input.Email" class="input" />
+                        <span asp-validation-for="Input.Email" class="help is-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="vertical-align: middle; width:100%">
+                        @if (!Model.IsEmailConfirmed)
+                        {
+                            <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="button is-warning is-fullwidth">Verifizierungs E-Mail senden</button>
+                        }
+                        else
+                        {
+                            <p class="help is-success"> E-Mail ist verifiziert.</p>
+                        }
+                    </td>
+                </tr>
+            </table>
+            <button class="button is-primary is-fullwidth">Änderungen speichern</button>
+        </form>
+    </div>
+    <div class="column is-6">
+        Falls deine E-Mail Adresse noch nicht bestätigt ist, führe die Verifizierung bitte durch.
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

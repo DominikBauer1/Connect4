@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<section class="hero is-dark is-small">
+    <div class="hero-body is-hero-title">
+        <div class="container">
+            <div class="column is-10">
+                <h3 class="title">Verwalte deinen Account</h3>
+                <p class="subtitle">Ändere Einstellungen bezügliche deines Accounts.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container is-marginless">
+        <div class="tabs">
+            <ul>
+                <partial name="_ManageNav" />
+            </ul>
+        </div>
+        @RenderBody()
+    </div>
+</section>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

@@ -1,0 +1,21 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Fehler";
+}
+
+<section class="hero is-dark is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="column is-8 is-offset-2">
+                <h3 class="title">Fehler</h3>
+                <p class="subtitle">Es ist ein Fehler während der bearbeitung ihrer Anfrage aufgetreten.</p>
+
+                @if (Model.ShowRequestId)
+                {
+                    <p><strong>Request ID:</strong> <code class="is-dark">@Model.RequestId</code></p>
+                }
+            </div>
+        </div>
+    </div>
+</section>

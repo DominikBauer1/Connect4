@@ -1,0 +1,51 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<section class="hero is-dark is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title">Registrieren</h3>
+                <p class="subtitle">Erstelle einen eigenen Account.</p>
+                <div class="box">
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="All" class="help is-danger"></div>
+                        <div class="field">
+                            <div class="control">
+                                <input asp-for="Input.UserName" class="input" placeholder="Benutzername" autofocus="" />
+                                <span asp-validation-for="Input.UserName" class="help is-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <input asp-for="Input.Password" class="input" placeholder="Passwort" />
+                                <span asp-validation-for="Input.Password" class="help is-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <input asp-for="Input.ConfirmPassword" class="input" placeholder="Passwort bestätigen" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="help is-danger"></span>
+                            </div>
+                        </div>
+
+                        <button class="button is-primary is-fullwidth">Registrieren</button>
+                    </form>
+                </div>
+                <p>
+                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Anmelden</a> &nbsp;·&nbsp;
+                    <a asp-page="./ForgotPassword">Passwort vergessen</a> &nbsp;&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

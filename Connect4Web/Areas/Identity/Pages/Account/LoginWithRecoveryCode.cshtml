@@ -1,0 +1,40 @@
+﻿@page
+@model LoginWithRecoveryCodeModel
+@{
+    ViewData["Title"] = "Anmelden mit Wiederherstellungscode";
+}
+
+<section class="hero is-dark is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title">Widerherstellungscode</h3>
+                <p class="subtitle">Melde dich mithilfe eines Wiederherstellungscodes an.</p>
+                <div class="box">
+                    <p>
+                        Ein Wiederherstellungscode kann nur einmal verwendet werden.
+                        Du kannst jedoch nachdem du dich angemeldet hast, neue erstellen oder die Zwei-Faktor-Authentifizierung deaktivieren.
+                    </p>
+                    <form method="post">
+                        <div asp-validation-summary="All" class="help is-danger"></div>
+                        <div class="field">
+                            <div class="control">
+                                <input asp-for="Input.RecoveryCode" class="input" placeholder="Wiederherstellungscode" autofocus="" autocomplete="off" />
+                                <span asp-validation-for="Input.RecoveryCode" class="help is-danger"></span>
+                            </div>
+                        </div>
+                        <button class="button is-primary is-fullwidth">Login</button>
+                    </form>
+                </div>
+                <p>
+                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Anmelden</a> &nbsp;·&nbsp;
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrieren</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

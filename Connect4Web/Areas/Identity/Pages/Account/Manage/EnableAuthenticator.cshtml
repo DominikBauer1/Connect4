@@ -1,0 +1,75 @@
+﻿@page
+@model EnableAuthenticatorModel
+@{
+    ViewData["Title"] = "Zwei-Faktor-Authentifizierung konfigurieren";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<div style="padding-left: 0.75rem">
+    <h3 class="title is-3 has-text-primary">@ViewData["Title"]</h3>
+    @Html.Partial("_StatusMessage", Model.StatusMessage)
+</div>
+<div class="columns is-marginless">
+    <div class="column is-6">
+        <p style="margin-bottom: 2rem;">
+            Wenn du die Zwei-Faktor-Authentifizierung aktivierts wirds nachdem du dein Passwort eingegeben hast nach einem Token gefragt.
+            Dieser Token kann mittels einer App geriert werden.
+            Der Token wird mittels der aktuellen Uhrzeit und einem voher ausgetauschtem Schlüssel alle paar Sekunden neu berechnet.
+            Dies bitet mehr Sicherheit für deinen Account, denn wenn jemand dein Passwort herausgefunden hat, muss er zusätzlich den Token eingeben.
+        </p>
+        <p style="margin-bottom: 2rem;">
+            Nachdem du eine 2FA-App installiert hast, kannst du den QR-Code scannen oder folgenden Schlüssel manuell eintragen.
+            Groß- /Kleinschreibung ist egal genauso wie Leerzeichen.
+        </p>
+        <kbd style="margin-left: 2rem;">@Model.SharedKey.ToUpper()</kbd>
+        <div style="margin: 2rem;" id="qrCode"></div>
+
+        <p style="margin-bottom: 2rem;">
+            Um die App zu überprüfen und die 2FA zu aktiveren gib deinen aktuellen Token ein und drücke auf Aktivieren.
+        </p>
+
+        <form method="post">
+            <div class="field">
+                <div class="control">
+                    <input asp-for="Input.Code" class="input" placeholder="Token" />
+                    <span asp-validation-for="Input.Code" class="help is-danger"></span>
+                </div>
+            </div>
+            <button class="button is-primary is-fullwidth">2FA Überprüfen/Aktivieren</button>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </form>
+    </div>
+    <div class="column is-6">
+        <p style="margin-bottom: 1rem;">Es steht eine Vielzahl an Apps für die Zwei-Faktor-Authentifizierung zur Verfügung:</p>
+        <h5 class="title is-5 is-marginless">Android</h5>
+        <ul style="margin-bottom: 1rem;">
+            <li><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">Google Authenticator</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.azure.authenticator">Microsoft Authenticator</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.authy.authy">Authy</a></li>
+        </ul>
+        <h5 class="title is-5 is-marginless">iOS</h5>
+        <ul style="margin-bottom: 1rem;">
+            <li><a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">Google Authenticator</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?Linkid=825073">Microsoft Authenticator</a></li>
+            <li><a href="https://itunes.apple.com/de/app/authy/id494168017?mt=8">Authy</a></li>
+        </ul>
+        <h5 class="title is-5 is-marginless">Windows Phone</h5>
+        <ul style="margin-bottom: 1rem;">
+            <li><a href="https://go.microsoft.com/fwlink/?Linkid=825071">Microsoft Authenticator</a></li>
+        </ul>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript" src="~/lib/qrcode/qrcode.min.js"></script>
+    <script type="text/javascript">
+        new QRCode(document.getElementById("qrCode"),
+            {
+                text: "@Html.Raw(Model.AuthenticatorUri)",
+                width: 200,
+                height: 200
+            });
+    </script>
+}

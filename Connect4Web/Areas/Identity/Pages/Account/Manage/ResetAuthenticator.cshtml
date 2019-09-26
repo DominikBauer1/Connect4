@@ -1,0 +1,23 @@
+﻿@page
+@model ResetAuthenticatorModel
+@{
+    ViewData["Title"] = "Zwei-Faktor-Authentifizierung zurücksetzten";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+@Html.Partial("_StatusMessage", Model.StatusMessage)
+
+<div style="padding-left: 0.75rem">
+    <h3 class="title is-3 has-text-primary">@ViewData["Title"]</h3>
+</div>
+<div class="columns is-marginless">
+    <div class="column is-6">
+        <p style="margin-bottom: 2rem;">
+            Falls du deinen Zwei-Faktor-Authentifizierungsschlüssel zurücksetzt, wird die Zwei-Faktor-Authentifizierung solange deaktiviert, bis du eine neue 2FA-App hinzugefügt und verifizert hast.
+            Bitte beachte, dass alle bisher konfigurierten 2FA-Apps einen ungültigen Token anzeigen werden bis du jede App erneut hinzugefügt hast.
+        </p>
+        <form id="reset-authenticator-form" method="post" class="form-group">
+            <button id="reset-authenticator-button" class="button is-warning is-fullwidth" type="submit">Schlüssel zurücksetzen</button>
+        </form>
+    </div>
+</div>

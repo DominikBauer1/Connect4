@@ -1,0 +1,34 @@
+﻿@page
+@model DeletePersonalDataModel
+@{
+    ViewData["Title"] = "Persönliche Daten löschen";
+    ViewData["ActivePage"] = ManageNavPages.DeletePersonalData;
+}
+
+
+<div style="padding-left: 0.75rem">
+    <h3 class="title is-3 has-text-primary">@ViewData["Title"]</h3>
+</div>
+<div class="columns is-marginless">
+    <div class="column is-6">
+        <p style="margin-bottom: 2rem;">
+            Du hast das Recht alle deine über dich erhobenen persönlichen Daten zu löschen.
+            Dies ist <strong>permanent</strong> und kann nicht rückgangig gemacht werden.
+            Durch das Löschen wird auch dein Account bei uns <strong>dauerhaft gelöscht</strong>.
+        </p>
+        <form id="delete-user" method="post">
+            <div asp-validation-summary="All" class="help is-danger"></div>
+            <div class="field">
+                <div class="control">
+                    <input asp-for="Input.Password" class="input" placeholder="Passwort" />
+                    <span asp-validation-for="Input.Password" class="help is-danger"></span>
+                </div>
+            </div>
+            <button class="button is-danger is-fullwidth">Persönliche Daten und Account löschen</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

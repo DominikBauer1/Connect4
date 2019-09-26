@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="Public">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>@ViewData["Title"] - Connect4</title>
+
+    <link rel="stylesheet" href="~/lib/bulma-fluent/css/bulma.css" />
+    <link rel="stylesheet" href="~/lib/bulma-divider/dist/css/bulma-divider.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+<body>
+    <partial name="_Navigation" />
+    @RenderBody()
+    <footer class="footer">
+        <div class="content has-text-centered">
+            Connect4 by DHBW-Stuttgart TINF18D
+        </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+            crossorigin="anonymous"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/lib/aspnet-signalr/signalr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".navbar-burger").click(function () {
+                $(".navbar-burger").toggleClass("is-active");
+                $(".navbar-menu").toggleClass("is-active");
+            });
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

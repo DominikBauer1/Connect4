@@ -1,0 +1,30 @@
+﻿@page
+@model GenerateRecoveryCodesModel
+@{
+    ViewData["Title"] = "Wiederherstellungscodes generieren (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<div style="padding-left: 0.75rem">
+    <h3 class="title is-3 has-text-primary">@ViewData["Title"]</h3>
+    @Html.Partial("_StatusMessage", Model.StatusMessage)
+</div>
+<div class="columns is-marginless">
+    <div class="column is-6">
+        <p style="margin-bottom: 2rem;">
+            Wenn du nichtmehr auf deinen Zwei-Faktor-Authentifizierungs App zugreifen kannst, kannst du nurnoch mithilfe von Wiederherstellungscodes auf deinen Account zugreifen.
+            Jeden Wiederherstellungscode kannst du nur einmal verwenden. Jedoch kannst du nachdem du dich angemeldet hast hier neue Wiederherstellungscodes generieren.
+            <strong>Die alten Codes sind dann nichtmehr gültig.</strong>
+            Bitte beachte, dass durch das Generieren neuer Wiederherstellungscodes nicht der Schlüssle welcher von deiner Authentifizierungsapp verwendet wird.
+            Falls du den Schlüssel ändern willst, solltest du diesen <a asp-page="./ResetAuthenticator">hier zurücksetzen</a>.
+        </p>
+        <form method="post">
+            <button class="button is-danger is-fullwidth">Wiederherstellungscode generieren</button>
+        </form>
+    </div>
+    <div class="column is-6">
+        Wenn du ein Gerät mit einer Zwei-Faktor-Authentifizierung verloren hast oder es gestohlen wurde, reicht es nicht aus nur die 2FA zu deaktivieren und reaktivieren,
+        da der Schlüssle welcher von der App verwendet wird immernoch der selbe ist, wie der beim reaktivieren der Zwei-Faktor-Authentifizierung.
+        Ein neuer Schlüssle wird erst erzeugt, wenn du diese über <a asp-page="./ResetAuthenticator">Link zurücksetzt</a>.
+    </div>
+</div>

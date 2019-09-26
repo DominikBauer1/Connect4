@@ -1,0 +1,102 @@
+﻿@page
+@model TwoFactorAuthenticationModel
+@{
+    ViewData["Title"] = "Two-factor authentication (2FA)";
+}
+
+<div style="padding-left: 0.75rem">
+    <h3 class="title is-3 has-text-primary">@ViewData["Title"]</h3>
+    @Html.Partial("_StatusMessage", Model.StatusMessage)
+</div>
+<div class="columns is-marginless">
+    <div class="column is-6">
+        @if (Model.Is2faEnabled)
+        {
+            @if (Model.RecoveryCodesLeft == 0)
+            {
+                <article class="message is-danger" role="alert">
+                    <div class="message-body">
+                        <strong>Du hast keine Wiederherstellungcodes übrig. <a asp-page="./GenerateRecoveryCodes">Erstelle dir neue</a> oder du könntest den Zugriff auf deinen Account permanent verlieren!</strong>
+                    </div>
+                </article>
+            }
+            else if (Model.RecoveryCodesLeft == 1)
+            {
+                <article class="message is-danger" role="alert">
+                    <div class="message-body">
+                        Du hast noch einen Wiederherstellungcodes übrig. Du kannst dir <a asp-page="./GenerateRecoveryCodes">neue Wiederherstellungcodes generieren</a>.
+                    </div>
+                </article>
+            }
+            else if (Model.RecoveryCodesLeft == 2)
+            {
+                <article class="message is-danger" role="alert">
+                    <div class="message-body">
+                        Du hast noch zwei Wiederherstellungcodes übrig. Du kannst dir <a asp-page="./GenerateRecoveryCodes">neue Wiederherstellungcodes generieren</a>.
+                    </div>
+                </article>
+            }
+            else if (Model.RecoveryCodesLeft == 3)
+            {
+                <article class="message is-danger" role="alert">
+                    <div class="message-body">
+                        Du hast noch drei Wiederherstellungcodes übrig. Du kannst dir <a asp-page="./GenerateRecoveryCodes">neue Wiederherstellungcodes generieren</a>.
+                    </div>
+                </article>
+            }
+            else if (Model.RecoveryCodesLeft == 4)
+            {
+                <article class="message is-danger" role="alert">
+                    <div class="message-body">
+                        Du hast noch vier Wiederherstellungcodes übrig. Du kannst dir <a asp-page="./GenerateRecoveryCodes">neue Wiederherstellungcodes generieren</a>.
+                    </div>
+                </article>
+            }
+            else if (Model.RecoveryCodesLeft == 5)
+            {
+                <article class="message is-danger" role="alert">
+                    <div class="message-body">
+                        Du hast noch fünf Wiederherstellungcodes übrig. Du kannst dir <a asp-page="./GenerateRecoveryCodes">neue Wiederherstellungcodes generieren</a>.
+                    </div>
+                </article>
+            }
+
+            if (Model.IsMachineRemembered)
+            {
+                <form method="post" style="margin-bottom: 2rem;">
+                    <p style="margin-bottom: 1rem;">
+                        Im Moment brauchst du beim Anmelden keinen 2FA-Token einzugeben.
+                        Um dich bei diesem Browser wieder mit 2FA-Tokens anzumelden, kannst du diesen Browser vergessen.
+                    </p>
+                    <button type="submit" class="button is-primary is-fullwidth">Diesen Browser vergessen</button>
+                </form>
+            }
+        }
+        else
+        {
+            <p>Die Zwei-Faktor-Authentifizierung ist momentan nicht aktiviert. Um sie zu aktivieren musst du eine Authentifizirungs-App hinzufügen (siehe unten).</p>
+        }
+    </div>
+</div>
+
+<div style="padding-left: 0.75rem">
+    <h3 class="title is-3 has-text-primary">Authentifizierungs-Apps</h3>
+</div>
+<div class="columns is-marginless">
+    <div class="column is-6">
+        @if (!Model.HasAuthenticator)
+        {
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="button is-link">Add authenticator app</a>
+        }
+        else
+        {
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="button is-primary is-fullwidth" style="margin-bottom: 1rem;">Authentifizierungs-App hinzufügen</a>
+            <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="button is-primary is-fullwidth" style="margin-bottom: 1rem;">Authentifizierungs-Apps Schlüssel zurücksetzen</a>
+            <a id="reset-authenticator" asp-page="./GenerateRecoveryCodes" class="button is-primary is-fullwidth">Neue Wiederherstellungscodes generieren</a>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

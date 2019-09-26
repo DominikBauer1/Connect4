@@ -1,0 +1,29 @@
+@page
+@model ShowRecoveryCodesModel
+@{
+    ViewData["Title"] = "Wiederherstellungcodes";
+    ViewData["ActivePage"] = "TwoFactorAuthentication";
+}
+
+<div style="padding-left: 0.75rem">
+    <h3 class="title is-3 has-text-primary">@ViewData["Title"]</h3>
+    <partial name="_StatusMessage" for="StatusMessage" />
+</div>
+<div class="columns is-marginless">
+    <div class="column is-6">
+        <h4 class="title is-4 has-text-danger">Wichtig!</h4>
+        <p style="margin-bottom: 1rem;">
+            Wenn du keinen Zugriff auf deine Authentifizierungs-App hast, kannst du nurnoch mithilfe dieser Codes dich anmelden.
+            Schreib/Speicher bitte die Wiederherstellungscodes an einen sicheren Ort ab.
+            Du kannst dir jederzeit auch neue Wiederherstellungscodes generieren.
+        </p>
+        <article class="message is-danger" role="alert">
+            <div class="message-body" style="padding-left: 2rem;">
+                @for (var row = 0; row < Model.RecoveryCodes.Length; row += 2)
+                {
+                    <kbd class="recovery-code">@Model.RecoveryCodes[row]</kbd><text>&nbsp;&nbsp;&bull;&nbsp;&nbsp;</text><kbd class="recovery-code">@Model.RecoveryCodes[row + 1]</kbd><br />
+                }
+            </div>
+        </article>
+    </div>
+</div>
